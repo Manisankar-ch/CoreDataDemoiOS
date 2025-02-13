@@ -28,7 +28,7 @@ struct InfoRepository: InfoRepoProtocol {
     
     
     func updateStudent(student: Student) -> Bool {
-        var stu = getParticularStudent(id: student.id)
+        let stu = getParticularStudent(id: student.id)
         guard stu != nil else {return false}
         stu?.name = student.name
         stu?.age = student.age
@@ -57,16 +57,16 @@ struct InfoRepository: InfoRepoProtocol {
     }
     
     func deleteStudent(id: UUID) -> Bool {
-        var stu = getParticularStudent(id: id)
-        guard stu != nil else {return false}
-        CoreDataManager.getInstance().context.delete(stu!)
+        guard let stu = getParticularStudent(id: id)
+        else { return false }
+        CoreDataManager.getInstance().context.delete(stu)
         CoreDataManager.getInstance().saveContext()
         return true
         
     }
     
     
-    func getParticularStudent(id: UUID) -> StudentEntity? {
+    private func getParticularStudent(id: UUID) -> StudentEntity? {
         let fetchrequest = NSFetchRequest<StudentEntity>(entityName: "StudentEntity")
         let predicate = NSPredicate(format: "id==%@", id as CVarArg)
         

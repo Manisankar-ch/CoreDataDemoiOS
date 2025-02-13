@@ -10,7 +10,7 @@ import CoreData
 
 final class CoreDataManager: NSObject {
     
-    
+    private override init() {}
     private static let instance = CoreDataManager()
     
    
