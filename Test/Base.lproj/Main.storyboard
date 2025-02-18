@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,22 +19,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jAI-7P-g7i">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="635"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ei9-zu-rSK">
+                                <rect key="frame" x="50" y="778" width="293" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Book name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RUu-tS-0Nj">
+                                        <rect key="frame" x="0.0" y="0.0" width="293" height="13.333333333333334"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter author name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uon-qA-YNB">
+                                        <rect key="frame" x="0.0" y="13.333333333333371" width="293" height="13.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dB4-15-VOU">
+                                        <rect key="frame" x="0.0" y="26.666666666666625" width="293" height="13.333333333333332"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add new ">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="actionOnSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QAD-mE-m2o"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Evb-Ng-0Fs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ei9-zu-rSK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="0F4-sI-Kn5"/>
+                            <constraint firstItem="ei9-zu-rSK" firstAttribute="top" secondItem="jAI-7P-g7i" secondAttribute="bottom" constant="40" id="CCb-4T-mmE"/>
                             <constraint firstItem="jAI-7P-g7i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Obd-Vz-LHO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jAI-7P-g7i" secondAttribute="trailing" id="Wiy-Pd-UG9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jAI-7P-g7i" secondAttribute="bottom" id="azh-Wo-owS"/>
                             <constraint firstItem="jAI-7P-g7i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="elx-wB-qUM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ei9-zu-rSK" secondAttribute="trailing" constant="50" id="hVJ-4x-KUC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ei9-zu-rSK" secondAttribute="bottom" id="iAS-cV-48M"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dNf-7f-hy1"/>
                     <connections>
+                        <outlet property="authorTextField" destination="Uon-qA-YNB" id="U1i-a5-RXF"/>
                         <outlet property="mainTableView" destination="jAI-7P-g7i" id="ZtZ-Er-Iv6"/>
+                        <outlet property="nameTextField" destination="RUu-tS-0Nj" id="5FX-PO-zIn"/>
+                        <outlet property="saveButton" destination="dB4-15-VOU" id="crk-0F-Zsl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -115,40 +156,49 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHL-0P-vgd">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Author" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHL-0P-vgd">
                                 <rect key="frame" x="20" y="213" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSK-ur-aty">
-                                <rect key="frame" x="146.66666666666666" y="303" width="100" height="35"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="90K-jb-Ke3">
+                                <rect key="frame" x="20" y="267" width="353" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSK-ur-aty">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="7uT-gx-ZFT"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Confirm"/>
+                                        <connections>
+                                            <action selector="actionOnConfirmBtn:" destination="0AT-2u-peu" eventType="touchUpInside" id="eHw-KI-5gz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="7uT-gx-ZFT"/>
-                                    <constraint firstAttribute="width" constant="100" id="F1t-8x-Y2y"/>
+                                    <constraint firstAttribute="height" constant="35" id="GcG-Lc-fnT"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Confirm"/>
-                                <connections>
-                                    <action selector="actionOnConfirmBtn:" destination="0AT-2u-peu" eventType="touchUpInside" id="eHw-KI-5gz"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="06N-y9-Vmi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="06N-y9-Vmi" firstAttribute="trailing" secondItem="Cnb-6G-mR8" secondAttribute="trailing" constant="20" id="9mL-mT-0B2"/>
                             <constraint firstItem="06N-y9-Vmi" firstAttribute="trailing" secondItem="cHL-0P-vgd" secondAttribute="trailing" constant="20" id="ATC-tg-sP9"/>
-                            <constraint firstItem="gSK-ur-aty" firstAttribute="centerX" secondItem="FDH-9e-d9G" secondAttribute="centerX" id="Ic7-Z0-0fn"/>
-                            <constraint firstItem="gSK-ur-aty" firstAttribute="top" secondItem="cHL-0P-vgd" secondAttribute="bottom" constant="56" id="IvC-Ry-VBb"/>
+                            <constraint firstItem="90K-jb-Ke3" firstAttribute="top" secondItem="cHL-0P-vgd" secondAttribute="bottom" constant="20" id="HQQ-Xm-aQm"/>
                             <constraint firstItem="cHL-0P-vgd" firstAttribute="leading" secondItem="06N-y9-Vmi" secondAttribute="leading" constant="20" id="SQ2-KW-Iqk"/>
+                            <constraint firstItem="06N-y9-Vmi" firstAttribute="trailing" secondItem="90K-jb-Ke3" secondAttribute="trailing" constant="20" id="e9k-ir-G78"/>
                             <constraint firstItem="Cnb-6G-mR8" firstAttribute="top" secondItem="06N-y9-Vmi" secondAttribute="top" constant="100" id="jxh-6R-fzK"/>
                             <constraint firstItem="Cnb-6G-mR8" firstAttribute="leading" secondItem="06N-y9-Vmi" secondAttribute="leading" constant="20" id="tJu-Ep-iJA"/>
                             <constraint firstItem="cHL-0P-vgd" firstAttribute="top" secondItem="Cnb-6G-mR8" secondAttribute="bottom" constant="20" id="xls-rV-8zn"/>
+                            <constraint firstItem="90K-jb-Ke3" firstAttribute="leading" secondItem="06N-y9-Vmi" secondAttribute="leading" constant="20" id="zRT-J5-yId"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hRp-Ni-jX8"/>
                     <connections>
                         <outlet property="ageTextField" destination="cHL-0P-vgd" id="pxS-tq-r5o"/>
+                        <outlet property="buttonsStackView" destination="90K-jb-Ke3" id="edk-wo-Dta"/>
                         <outlet property="confirmBtn" destination="gSK-ur-aty" id="wi4-cT-TuN"/>
                         <outlet property="nameTextField" destination="Cnb-6G-mR8" id="6Hp-rR-ayM"/>
                     </connections>
@@ -177,6 +227,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

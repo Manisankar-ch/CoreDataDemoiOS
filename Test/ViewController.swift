@@ -10,7 +10,19 @@ import CoreData
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var authorTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var mainTableView: UITableView!
+    
+    var emptyTitleLabel = {
+        var label = UILabel()
+        label.text = "Add new note"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     let coreDataInstance = CoreDataManager.getInstance()
     private var manager = InfoManager()
@@ -23,29 +35,58 @@ class ViewController: UIViewController {
         return nil
     }
     
+    @IBAction func actionOnSaveButton(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialScreenViewController") as! InitialScreenViewController
+        vc.callBackAction = { [weak self] in
+            self?.updateStudents()
+        }
+           self.present(vc, animated: true, completion: nil)
+    }
+    
+    private func navigateToDetailScreen(student: Student) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialScreenViewController") as! InitialScreenViewController
+        vc.student = student
+        self.present(vc, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         registerNib()
         mainTableView.dataSource = self
         mainTableView.delegate = self
+        authorTextField.isHidden = true
+        nameTextField.isHidden = true
+        view.addSubview(emptyTitleLabel)
+        addConstraints()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateStudents()
+    }
+
+    func updateStudents() {
         studentList = manager.getStudents() ?? []
         if !studentList.isEmpty {
-            mainTableView.reloadData()
+            emptyTitleLabel.isHidden = true
+        } else {
+            emptyTitleLabel.isHidden = false
         }
+        mainTableView.reloadData()
     }
     
     func registerNib() {
         mainTableView.register(UINib(nibName: "InfoTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTableViewCell")
     }
+    
     func registerVerticalTableViewCellNib() {
         mainTableView.register(UINib(nibName: "VerticalTableViewCell", bundle: nil), forCellReuseIdentifier: "VerticalTableViewCell")
-        
+    }
+    
+    func addConstraints() {
+        emptyTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emptyTitleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
 
@@ -53,36 +94,24 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return Utils.colors_Array.count + 1
         return studentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "VerticalTableViewCell", for: indexPath) as! VerticalTableViewCell
-//        cell.configureCell(isCollectionView: indexPath.row == 0)
-//        cell.backgroundColor = indexPath.row != 0 ? Utils.colors_Array[indexPath.row - 1] : .white
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTableViewCell", for: indexPath) as! InfoTableViewCell
-        
-        cell.configureCell(name: studentList[indexPath.row].name ?? "" , age: "\(studentList[indexPath.row].age)")
-        
+        let data = studentList[indexPath.row]
+        cell.configureCell(name: data.name ?? "", age: data.author)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 200
-//        }
-//        return 250
-        
         return 50
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = EditInfoViewController.makeViewController() {
-            vc.student = studentList[indexPath.row]
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        let student = studentList[indexPath.row]
+        navigateToDetailScreen(student: student)
     }
 }

@@ -2,8 +2,6 @@
 //  CoreDataManager.swift
 //  Test
 //
-//  Created by Softsuave on 13/02/24.
-//
 
 import Foundation
 import CoreData

@@ -2,8 +2,6 @@
 //  StudentEntity+CoreDataProperties.swift
 //  Test
 //
-//  Created by Softsuave on 16/02/24.
-//
 //
 
 import Foundation
@@ -19,12 +17,12 @@ extension StudentEntity {
     @NSManaged public var name: String?
     @NSManaged public var age: Int32
     @NSManaged public var id: UUID?
-
+    @NSManaged public var author: String?
     
     
     func convertToStudent() -> Student {
         
-        return Student(name: self.name, age: self.age, id: self.id!)
+        return Student(name: self.name, age: self.age, id: self.id!, author: self.author ?? "")
     }
 }
 

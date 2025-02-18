@@ -2,8 +2,6 @@
 //  InfoRepository.swift
 //  Test
 //
-//  Created by Softsuave on 15/02/24.
-//
 
 import Foundation
 import CoreData
@@ -53,6 +51,7 @@ struct InfoRepository: InfoRepoProtocol {
         stu.age = student.age
         stu.name = student.name
         stu.id = student.id
+        stu.author = student.author
         CoreDataManager.getInstance().saveContext()
     }
     

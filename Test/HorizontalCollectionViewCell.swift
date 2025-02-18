@@ -2,8 +2,6 @@
 //  HorizontalCollectionViewCell.swift
 //  Test
 //
-//  Created by Softsuave on 03/02/24.
-//
 
 import UIKit
 

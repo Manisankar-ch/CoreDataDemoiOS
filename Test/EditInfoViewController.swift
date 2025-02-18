@@ -2,8 +2,6 @@
 //  EditInfoViewController.swift
 //  Test
 //
-//  Created by Softsuave on 15/02/24.
-//
 
 import Foundation
 import UIKit
@@ -20,7 +18,9 @@ class EditInfoViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
+    deinit {
+        print(self, "deintegrated")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
